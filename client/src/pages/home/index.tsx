@@ -1,4 +1,5 @@
 import React from "react";
+import "./index.less"
 import Header from "./components/header";
 import Search from "./components/search";
 import Hot from "./components/hot";
@@ -10,7 +11,9 @@ const Home:React.FC<IHomeProps> = (props) => {
       {/* header */}
       <Header />
       {/* search */}
+      <Search />
       {/* hot */}
+      <Hot />
     </div>
 }
 
