@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { Picker, List, Button, Calendar } from "antd-mobile";
+import { ICities } from "@/type";
 import dayjs from "dayjs";
 
-interface ISearchProps { }
+interface ISearchProps {
+  cities?: ICities
+}
 
 const DATE_FORMATE = 'YYYY-MM-DD'
 
 const Search: React.FC<ISearchProps> = (props) => {
-  const [cities, setCities] = React.useState([[{ label: '杭州', value: '10001' }, { label: '苏州', value: '10002' }]])
+  // const [cities, setCities] = React.useState([[{ label: '杭州', value: '10001' }, { label: '苏州', value: '10002' }]])
   const [selectedCites, setSelectedCites] = React.useState(["10001"])
   const [calendarVisible, setCalendarVisible] = React.useState(false)
   const [date, setDate] = React.useState("select")
@@ -22,18 +25,19 @@ const Search: React.FC<ISearchProps> = (props) => {
       `${dayjs(startTime).format(DATE_FORMATE)}~${dayjs(endTime).format(DATE_FORMATE)}`
     )
   }
-  
+
   const handleCityChange = (value: any) => {
     console.log(value)
     setSelectedCites(value)
   }
-
+  const { cities = [] } = props
+  console.log(cities)
   return <div className="search">
     {/* optional cities */}
     <div className="search-addr">
       <Picker
         title="city"
-        data={cities}
+        data={cities as any}
         value={selectedCites}
         cascade={false}
         cols={1}

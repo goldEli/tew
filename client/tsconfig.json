@@ -6,15 +6,16 @@
     "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
+    "noImplicitAny": true,
     "sourceMap": true,
     "baseUrl": "./",
     "strict": true,
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
-      "@/hooks": ["hooks/index"],
-      "@/components": ["compnents/index"],
-      "@/utils": ["utils/index"]
+      // "@/hooks": ["hooks/index"],
+      // "@/components": ["compnents/index"],
+      // "@/utils": ["utils/index"]
     },
     "allowSyntheticDefaultImports": true
   },

@@ -4,17 +4,17 @@ import { IHttpOptions } from "@/type";
 import { Http } from "../utils";
 
 
-export default function useHttpHook(
+export default function useHttpHook<T>(
   {
     url,
     method = "post",
     headers = {},
     body = {},
     watch = []
-  }: IHttpOptions & { watch: any[] }
-) {
-  const [result, setResult] = React.useState()
-  const [loading, setLoading] = useState(true)
+  }: IHttpOptions & { watch?: any[] }
+): [T | undefined, boolean] {
+  const [result, setResult] = React.useState<T>()
+  const [loading, setLoading] = useState<boolean>(true)
   React.useEffect(() => {
     Http({
       url,

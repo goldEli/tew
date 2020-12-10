@@ -5,3 +5,10 @@ export interface IHttpOptions {
   headers?: HeadersInit,
   body?: Object,
 }
+
+export interface ICities {
+  [index: number]: {
+    label: string,
+    value: string
+  }[]
+}
