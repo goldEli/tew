@@ -27,7 +27,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     watch: [params.current, params.houseName]
   })
 
-  useObserverHook('bottomLoading', (entries) => {
+  useObserverHook('#bottomLoading', (entries) => {
     if (!loading && entries[0].isIntersecting) {
       setParams(prev => {
         return {

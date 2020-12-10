@@ -1,15 +1,16 @@
 import React, { useEffect } from "react"
 // let observer: IntersectionObserver | undefined
 export default function useObserverHook(
-  eleId: string,
-  callback: (entries: IntersectionObserverEntry[]) => void
+  selectors: string,
+  callback: (entries: IntersectionObserverEntry[]) => void,
+  watch?: any[],
 ) {
   useEffect(() => {
 
     let observer = new IntersectionObserver((entries) => {
       callback && callback(entries)
     });
-    const element = document.querySelector("#" + eleId) as HTMLElement
+    const element = document.querySelector(selectors) as HTMLElement
     if (element) {
       observer.observe(element)
     }
@@ -20,5 +21,5 @@ export default function useObserverHook(
         observer.disconnect()
       }
     }
-  })
+  }, watch)
 }
