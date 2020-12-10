@@ -1,12 +1,16 @@
 import React from 'react';
 import styles from './index.css';
+import { MenuBar } from "../components";
+import { useLocation } from "umi";
 
 const BasicLayout: React.FC = props => {
+  const location = useLocation()
+  const paths = ['/', '/user', '/order']
   return (
-    <div className={styles.normal}>
-      <h1 className={styles.title}>Welcome to umi!</h1>
+    <>
       {props.children}
-    </div>
+      <MenuBar show={paths.includes(location.pathname)} pathname={location.pathname} />
+    </>
   );
 };
 
