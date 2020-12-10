@@ -3,6 +3,8 @@ import { SearchBar, WhiteSpace } from "antd-mobile"
 import { useHttpHook } from "@/hooks"
 import { IHouses } from "@/type"
 
+import "./index.less"
+
 interface ISearchProps { }
 
 const Search: React.FC<ISearchProps> = (props) => {
