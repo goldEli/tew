@@ -13,12 +13,13 @@ const Search: React.FC<ISearchProps> = (props) => {
   const [allList, setAllList] = React.useState<IHouses>([])
   const [pagination, setPagination] = React.useState({
     current: 1,
-    pageSize: 8
+    pageSize: 8,
+    houseName: ""
   })
   const [houses = [], loading] = useHttpHook<IHouses>({
     url: "/houses/search",
     body: pagination,
-    watch: [pagination.current]
+    watch: [pagination.current, pagination.houseName]
   })
 
   useObserverHook('bottomLoading', (entries) => {
@@ -26,7 +27,7 @@ const Search: React.FC<ISearchProps> = (props) => {
       setPagination(prev => {
         return {
           ...prev,
-          current: prev.current + 1
+          current: prev.current + 1,
         }
       })
     }
@@ -45,9 +46,22 @@ const Search: React.FC<ISearchProps> = (props) => {
   }, [houses])
 
   const handleCancel = () => {
+    setPagination({
+      ...pagination,
+      current: 1,
+      houseName: ""
+    })
+    setAllList([])
+    setSearchVal("")
 
   }
-  const handleSubmit = () => {
+  const handleSubmit = (value: string) => {
+    setPagination({
+      ...pagination,
+      current: 1,
+      houseName: value
+    })
+    setAllList([])
   }
   return (
     <div className="search-page">
