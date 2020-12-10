@@ -14,7 +14,7 @@ const Home: React.FC<IHomeProps> = (props) => {
     url: "/common/cities"
   })
   const [houses, housesLoading] = useHttpHook<IHouses>({
-    url: "/common/houses"
+    url: "/common/houses/hot"
   })
   return <div className="home">
     {/* header */}
