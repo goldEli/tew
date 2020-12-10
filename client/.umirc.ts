@@ -29,6 +29,11 @@ export default defineConfig({
           component: "@/pages/search/index",
           title: "Search"
         },
+        {
+          path: '/observer',
+          component: "@/pages/observer",
+          title: "Search"
+        },
       ]
     },
   ],
