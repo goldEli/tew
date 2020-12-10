@@ -3,28 +3,33 @@ import { SearchBar, ActivityIndicator } from "antd-mobile"
 import { useHttpHook } from "@/hooks"
 import { IHouses } from "@/type"
 import { useObserverHook } from "@/hooks";
+import { useLocation } from "umi"
 
 import "./index.less"
 
 interface ISearchProps { }
 
 const Search: React.FC<ISearchProps> = (props) => {
+  const { query } = useLocation() as any
   const [searchVal, setSearchVal] = React.useState("")
   const [allList, setAllList] = React.useState<IHouses>([])
-  const [pagination, setPagination] = React.useState({
+  const [params, setParams] = React.useState({
     current: 1,
     pageSize: 8,
-    houseName: ""
+    houseName: "",
+    code: query?.code,
+    startTime: `${query?.startTime} 00:00:00`,
+    endTime: `${query?.endTime} 23:59:59`,
   })
   const [houses = [], loading] = useHttpHook<IHouses>({
     url: "/houses/search",
-    body: pagination,
-    watch: [pagination.current, pagination.houseName]
+    body: params,
+    watch: [params.current, params.houseName]
   })
 
   useObserverHook('bottomLoading', (entries) => {
     if (!loading && entries[0].isIntersecting) {
-      setPagination(prev => {
+      setParams(prev => {
         return {
           ...prev,
           current: prev.current + 1,
@@ -46,8 +51,8 @@ const Search: React.FC<ISearchProps> = (props) => {
   }, [houses])
 
   const handleCancel = () => {
-    setPagination({
-      ...pagination,
+    setParams({
+      ...params,
       current: 1,
       houseName: ""
     })
@@ -56,8 +61,8 @@ const Search: React.FC<ISearchProps> = (props) => {
 
   }
   const handleSubmit = (value: string) => {
-    setPagination({
-      ...pagination,
+    setParams({
+      ...params,
       current: 1,
       houseName: value
     })
