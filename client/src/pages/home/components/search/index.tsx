@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Picker, List, Button, Calendar } from "antd-mobile";
 import { ICities } from "@/type";
 import dayjs from "dayjs";
+import { history } from "umi"
 
 interface ISearchProps {
   cities?: ICities
@@ -52,7 +53,9 @@ const Search: React.FC<ISearchProps> = (props) => {
       <p className='search-time_left'>Date</p>
       <p className='search-time_right'>{date}</p>
     </div>{/* click button */}
-    <Button size="large" type="warning">Search</Button>
+    <Button onClick={() => history.push({
+      pathname: "search"
+    })} size="large" type="warning">Search</Button>
     <Calendar
       visible={calendarVisible}
       onCancel={handleCalendarVisible}

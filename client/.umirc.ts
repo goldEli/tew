@@ -12,17 +12,22 @@ export default defineConfig({
         {
           path: '/',
           component: "@/pages/home/index",
-          title: "首页"
+          title: "Home"
         },
         {
           path: '/order',
           component: "@/pages/order/index",
-          title: "订单"
+          title: "Order"
         },
         {
           path: '/user',
           component: "@/pages/user/index",
-          title: "用户"
+          title: "User"
+        },
+        {
+          path: '/search',
+          component: "@/pages/search/index",
+          title: "Search"
         },
       ]
     },
