@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Picker, List, Button, Calendar } from "antd-mobile";
+import { Picker, List, Button, Calendar, Toast } from "antd-mobile";
 import { ICities } from "@/type";
 import dayjs from "dayjs";
 import { history } from "umi"
@@ -31,6 +31,21 @@ const Search: React.FC<ISearchProps> = (props) => {
     console.log(value)
     setSelectedCites(value)
   }
+
+  const handleSearch = () => {
+    if (!date.includes("~")) {
+      Toast.fail("Please select date!")
+      return
+    }
+    history.push({
+      pathname: "search",
+      query: {
+        code: selectedCites[0],
+        startTime: date.split("~")[0],
+        endTime: date.split("~")[1],
+      }
+    })
+  }
   const { cities = [] } = props
   console.log(cities)
   return <div className="search">
@@ -53,9 +68,9 @@ const Search: React.FC<ISearchProps> = (props) => {
       <p className='search-time_left'>Date</p>
       <p className='search-time_right'>{date}</p>
     </div>{/* click button */}
-    <Button onClick={() => history.push({
-      pathname: "search"
-    })} size="large" type="warning">Search</Button>
+    <Button
+      onClick={handleSearch}
+      size="large" type="warning">Search</Button>
     <Calendar
       visible={calendarVisible}
       onCancel={handleCalendarVisible}
