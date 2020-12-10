@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchBar, WhiteSpace } from "antd-mobile"
+import { SearchBar, WhiteSpace, ActivityIndicator } from "antd-mobile"
 import { useHttpHook } from "@/hooks"
 import { IHouses } from "@/type"
 
@@ -32,22 +32,27 @@ const Search: React.FC<ISearchProps> = (props) => {
       />
       <WhiteSpace />
       {/* search result */}
-      <div className="result">
-        {
-          houses?.map(item => {
-            return (
-              <div className='item' key={item.id} >
+      {loading ? <ActivityIndicator toast /> :
+        (
+          <div className="result">
+            {
+              houses?.map(item => {
+                return (
+                  <div className='item' key={item.id} >
 
-                <img alt='img' src={item.img} />
-                <div className='item-right'>
-                  <div className='title'>{item.title}</div>
-                  <div className='price'>{item.price}</div>
-                </div>
-              </div>
-            )
-          })
-        }
-      </div>
+                    <img alt='img' src={item.img} />
+                    <div className='item-right'>
+                      <div className='title'>{item.title}</div>
+                      <div className='price'>{item.price}</div>
+                    </div>
+                  </div>
+                )
+              })
+            }
+          </div>
+
+        )
+      }
     </div>
   )
 }
