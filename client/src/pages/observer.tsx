@@ -6,7 +6,7 @@ interface IObserverProps { }
 
 const Observer: React.FC<IObserverProps> = (props) => {
 
-  useObserverHook("#box", (entries) => {
+  useObserverHook("box", (entries) => {
     console.log(entries)
   })
 
