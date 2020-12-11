@@ -20,7 +20,7 @@ const Footer: React.FC<IFooterProps> = (props) => {
   return (
     <>
       <div className='footer' onClick={handleClick}>
-        评论~
+        Comment
       </div>
       <Modal
         popup
@@ -34,7 +34,7 @@ const Footer: React.FC<IFooterProps> = (props) => {
             count={200}
             onChange={handleChange}
           />
-          <Button  type='warning' onClick={handleSubmit}>评论</Button>
+          <Button  type='warning' onClick={handleSubmit}>Comment</Button>
         </div>
       </Modal>
     </>

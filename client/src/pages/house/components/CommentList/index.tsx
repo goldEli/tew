@@ -17,7 +17,7 @@ const CommentList: React.FC<ICommentListProps> = (props) => {
 
   return (
     <div className='comment'>
-      <h1 className='comment-title'>评论</h1>
+      <h1 className='comment-title'>Comment</h1>
       <div className='comment-lists'>
         {props?.lists?.map(item => (
           <div className='comment-lists_item' key={item?.id}>
