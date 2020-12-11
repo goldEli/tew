@@ -4,6 +4,7 @@ import { useHttpHook, useImgHook } from "@/hooks"
 import { IHouses } from "@/type"
 import { useObserverHook } from "@/hooks";
 import { useLocation } from "umi"
+import { ShowLoading } from "@/components"
 
 import "./index.less"
 
@@ -27,7 +28,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     watch: [params.current, params.houseName]
   })
 
-  useObserverHook('#bottomLoading', (entries) => {
+  useObserverHook('#tew-loading', (entries) => {
     if (!loading && entries[0].isIntersecting) {
       setParams(prev => {
         return {
@@ -99,9 +100,7 @@ const Search: React.FC<ISearchProps> = (props) => {
                 )
               })
             }
-            {
-              houses.length ? <div id="bottomLoading">loading...</div> : <div>No more data</div>
-            }
+            <ShowLoading loading={houses.length > 0} />
           </div>
 
         )
