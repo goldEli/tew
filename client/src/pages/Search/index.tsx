@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { SearchBar, ActivityIndicator } from "antd-mobile"
-import { useHttpHook } from "@/hooks"
+import { useHttpHook, useImgHook } from "@/hooks"
 import { IHouses } from "@/type"
 import { useObserverHook } from "@/hooks";
 import { useLocation } from "umi"
@@ -37,6 +37,8 @@ const Search: React.FC<ISearchProps> = (props) => {
       })
     }
   })
+
+  useImgHook(".search-item-img")
 
   useEffect(() => {
     if (houses.length) {
@@ -88,7 +90,7 @@ const Search: React.FC<ISearchProps> = (props) => {
                 return (
                   <div className='item' key={item.id} >
 
-                    <img alt='img' src={item.img} />
+                    <img className='search-item-img' data-src={item.img} alt='img' src={require("../../assets/blank.png")} />
                     <div className='item-right'>
                       <div className='title'>{item.title}</div>
                       <div className='price'>{item.price}</div>
