@@ -34,6 +34,11 @@ export default defineConfig({
           component: "@/pages/observer",
           title: "Search"
         },
+        {
+          path: '/house',
+          component: "@/pages/house",
+          title: "House"
+        },
       ]
     },
   ],
