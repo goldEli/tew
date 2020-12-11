@@ -1,15 +1,16 @@
 
 
-import React, { Suspense } from "react";
+import React, { Suspense, useMemo } from "react";
 
-interface ILazyLoadProps { 
-  url: string
- }
+interface ILazyLoadProps {
+  Lazy: React.LazyExoticComponent<React.ComponentType<any>>
+}
 
 const LazyLoad: React.FC<ILazyLoadProps> = (props) => {
+  const {Lazy} = props
   return <div>
     <Suspense fallback={<div>loading...</div>}>
-      {React.lazy(() => import(props.url))}
+      <Lazy />
     </Suspense>
   </div>
 }
