@@ -5,6 +5,7 @@ import { IHouses } from "@/type"
 import { useObserverHook } from "@/hooks";
 import { useLocation } from "umi"
 import { ShowLoading } from "@/components"
+import { commonEnums } from "@/enums";
 
 import "./index.less"
 
@@ -28,7 +29,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     watch: [params.current, params.houseName]
   })
 
-  useObserverHook('#tew-loading', (entries) => {
+  useObserverHook('#'+commonEnums.LOADING_ID, (entries) => {
     if (!loading && entries[0].isIntersecting) {
       setParams(prev => {
         return {
