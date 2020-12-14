@@ -5,7 +5,7 @@ import { HouseCommentList } from "@/type";
 
 interface ICommentListProps {
   lists?: HouseCommentList;
-  showLoading?: boolean;
+  showLoading: boolean;
 }
 
 const CommentList: React.FC<ICommentListProps> = (props) => {
