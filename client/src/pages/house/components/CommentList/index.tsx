@@ -28,7 +28,7 @@ const CommentList: React.FC<ICommentListProps> = (props) => {
             </div>
           </div>
         ))}
-        <ShowLoading loading={props.showLoading === void 0 ? false : props.showLoading} />
+        <ShowLoading loading={props.showLoading} />
       </div>
     </div>
   )

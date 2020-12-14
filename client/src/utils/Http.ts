@@ -2,16 +2,16 @@ import { Toast } from 'antd-mobile';
 import { IHttpOptions } from "@/type";
 
 
-export default function http({
+export default function http<T>({
   url,
   method = 'post',
   headers,
   body = {},
   setLoading,
   setResult,
-}: IHttpOptions & {
-  setLoading: Function,
-  setResult: Function
+}: IHttpOptions<T> & {
+  setLoading?: Function,
+  setResult?: Function
 }) {
   setLoading && setLoading(true);
 

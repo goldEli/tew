@@ -95,7 +95,7 @@ export default {
   'post /api/comments/lists': (req, res) => {
     setTimeout(() => {
       let data;
-      if (req.body.pageNum < 4) {
+      // if (req.body.pageNum < 4) {
         data = [
           {
             id: 1,
@@ -154,9 +154,9 @@ export default {
             info: '早餐味道美'
           },
         ]
-      } else {
-        data = [];
-      }
+      // } else {
+      //   data = [];
+      // }
       res.json({
         status: 200,
         data
