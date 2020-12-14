@@ -1,7 +1,7 @@
 
 import React, { useState } from "react"
 import { IHttpOptions } from "@/type";
-import { Http } from "../utils";
+import { http } from "../utils";
 
 
 export default function useHttpHook<T>(
@@ -16,7 +16,7 @@ export default function useHttpHook<T>(
   const [result, setResult] = React.useState<T>()
   const [loading, setLoading] = useState<boolean>(true)
   React.useEffect(() => {
-    Http({
+    http({
       url,
       method,
       headers,

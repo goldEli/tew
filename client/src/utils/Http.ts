@@ -2,7 +2,7 @@ import { Toast } from 'antd-mobile';
 import { IHttpOptions } from "@/type";
 
 
-export default function Http({
+export default function http({
   url,
   method = 'post',
   headers,
