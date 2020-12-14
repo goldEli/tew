@@ -2,12 +2,15 @@ import React from "react"
 import { useHttpHook, useObserverHook } from "@/hooks"
 import { commonEnums } from "@/enums"
 import { HouseCommentList } from "@/type"
+import { useLocation } from "umi"
 
 export default function useCommentList(): [HouseCommentList, boolean] {
 
+  const { query } = useLocation()
   const [params, setParams] = React.useState({
     current: 1,
     pageSize: 8,
+    id: query.id
   })
   const [commentList, commentListLoading] = useHttpHook<HouseCommentList>({
     url: "/comments/lists", initData: [], body: params, watch: [params]
