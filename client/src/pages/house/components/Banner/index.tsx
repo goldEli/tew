@@ -1,7 +1,9 @@
 import React from "react";
 import AwesomeSwiper from 'react-awesome-swiper';
 
-interface IBannerProps { }
+interface IBannerProps {
+  list?: string[]
+}
 
 const Banner: React.FC<IBannerProps> = (props) => {
   const refSwiper = React.useRef(null)
@@ -36,15 +38,13 @@ const Banner: React.FC<IBannerProps> = (props) => {
   return (
     <AwesomeSwiper ref={refSwiper} config={config} className="banner">
       <div className="swiper-wrapper">
-        <div className="swiper-slide">
-          <img alt="img" src={require("../../../../assets/1.png")}></img>
-        </div>
-        <div className="swiper-slide">
-          <img alt="img" src={require("../../../../assets/2.png")}></img>
-        </div>
-        <div className="swiper-slide">
-          <img alt="img" src={require("../../../../assets/3.png")}></img>
-        </div>
+        {
+          props?.list?.map((item, idx) => (
+            <div className="swiper-slide">
+              <img alt="img" key={idx.toString()} src={item}></img>
+            </div>
+          ))
+        }
       </div>
       <div className="swiper-button-prev"></div>
       <div className="swiper-button-next"></div>

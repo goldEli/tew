@@ -1,16 +1,10 @@
 import React from "react";
 import { Button } from "antd-mobile";
 import { timer } from "@/utils";
+import { IHouseDetail } from "@/type"
 
-interface IInfoProps { 
-  detail?: {
-    title?: string;
-    msg?: string;
-    price?: number;
-    publishTime?: number;
-    startTime?: number;
-    endTime?: number
-  }
+interface IInfoProps {
+  detail?: IHouseDetail
 }
 
 const Info: React.FC<IInfoProps> = (props) => {

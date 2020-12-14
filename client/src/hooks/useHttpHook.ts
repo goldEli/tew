@@ -10,10 +10,11 @@ export default function useHttpHook<T>(
     method = "post",
     headers = {},
     body = {},
-    watch = []
-  }: IHttpOptions & { watch?: any[] }
+    watch = [],
+    initData
+  }: IHttpOptions<T> & { watch?: any[] }
 ): [T | undefined, boolean] {
-  const [result, setResult] = React.useState<T>()
+  const [result, setResult] = React.useState<T | undefined>(initData)
   const [loading, setLoading] = useState<boolean>(true)
   React.useEffect(() => {
     http({

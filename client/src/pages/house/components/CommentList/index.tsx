@@ -1,16 +1,11 @@
 import React from "react";
 import { ShowLoading } from '@/components';
 import { timer } from '@/utils';
+import { HouseCommentList } from "@/type";
 
 interface ICommentListProps {
-  lists?: {
-    id?: string,
-    avatar?: string,
-    username?: string,
-    createTime?: number,
-    info?: string,
-  }[];
-  showLoading: boolean;
+  lists?: HouseCommentList;
+  showLoading?: boolean;
 }
 
 const CommentList: React.FC<ICommentListProps> = (props) => {
@@ -33,7 +28,7 @@ const CommentList: React.FC<ICommentListProps> = (props) => {
             </div>
           </div>
         ))}
-        <ShowLoading loading={props.showLoading} />
+        <ShowLoading loading={props.showLoading === void 0 ? false : props.showLoading} />
       </div>
     </div>
   )

@@ -1,9 +1,10 @@
-
-export interface IHttpOptions {
+export * from "./house"
+export interface IHttpOptions<T> {
   url: string,
   method?: string,
   headers?: HeadersInit,
   body?: Object,
+  initData?: T
 }
 
 export type ICities = {

@@ -24,7 +24,7 @@ const Search: React.FC<ISearchProps> = (props) => {
     endTime: `${query?.endTime} 23:59:59`,
   })
   const [houses = [], loading] = useHttpHook<IHouses>({
-    url: "/houses/search",
+    url: "/house/search",
     body: params,
     watch: [params.current, params.houseName]
   })
