@@ -25,6 +25,11 @@ export default defineConfig({
           title: "User"
         },
         {
+          path: '/user/edit',
+          component: "@/pages/user/edit/index",
+          title: "Edit"
+        },
+        {
           path: '/search',
           component: "@/pages/search/index",
           title: "Search"
