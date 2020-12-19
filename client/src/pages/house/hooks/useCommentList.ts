@@ -3,10 +3,12 @@ import { useHttpHook } from "@/hooks"
 import { HouseCommentList } from "@/type"
 import { createModel } from "hox";
 import { http, getUrlParamsByKey } from "@/utils"
+import { commonEnums } from "@/enums";
 
 interface IReturnType {
   allCommenList: HouseCommentList;
   commentListLoading: boolean;
+  showLoading: boolean;
   action: {
     add: () => void;
     reset: () => void;
@@ -17,8 +19,7 @@ interface IReturnType {
 function useCommentList(): IReturnType {
 
   const [params, setParams] = React.useState({
-    current: 1,
-    pageSize: 8,
+    ...commonEnums.PAGE,
     id: getUrlParamsByKey("id")
   })
   const [commentList, commentListLoading] = useHttpHook<HouseCommentList>({
@@ -67,7 +68,7 @@ function useCommentList(): IReturnType {
     }
   }
 
-  return { allCommenList, commentListLoading, action: { add, reset, nextPage } }
+  return { allCommenList, commentListLoading, showLoading: (commentList?.length || 0) > 0, action: { add, reset, nextPage } }
 }
 
 export default createModel(useCommentList)

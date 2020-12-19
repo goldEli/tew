@@ -14,7 +14,7 @@ interface IHouseProps { }
 
 const House: React.FC<IHouseProps> = (props) => {
   const { query } = useLocation()
-  const { allCommenList, commentListLoading, action } = useCommentList()
+  const { allCommenList, commentListLoading, showLoading, action } = useCommentList()
   const [detail] = useHttpHook({
     url: "/house/detail", initData: {
       banner: [],
@@ -42,7 +42,7 @@ const House: React.FC<IHouseProps> = (props) => {
       {/* info */}
       <Info detail={detail?.info} />
       {/* comment list */}
-      <CommentList lists={allCommenList} showLoading={commentListLoading} />
+      <CommentList lists={allCommenList} showLoading={showLoading} />
       {/* footer */}
       <Footer />
     </div>

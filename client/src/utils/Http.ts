@@ -15,18 +15,17 @@ export default function http<T>({
 }) {
   setLoading && setLoading(true);
 
-  const requestHeaders: HeadersInit = new Headers();
-  requestHeaders.set('Content-Type', 'application/json');
   let params: RequestInit
   if (!(method.toUpperCase() === 'GET')) {
     params = {
       headers: {
-        ...requestHeaders,
+        'Content-Type': 'application/json',
         ...headers
       },
       method,
       body: JSON.stringify(body)
     }
+    console.log(params)
   }
 
   return new Promise((resolve, reject) => {
