@@ -1,4 +1,5 @@
 export * from "./house"
+export * from "./order"
 export interface IHttpOptions<T> {
   url: string,
   method?: string,
