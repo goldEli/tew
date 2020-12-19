@@ -9,7 +9,6 @@ interface ICommentListProps {
 }
 
 const CommentList: React.FC<ICommentListProps> = (props) => {
-
   return (
     <div className='comment'>
       <h1 className='comment-title'>Comment</h1>
