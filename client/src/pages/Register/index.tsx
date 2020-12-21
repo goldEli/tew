@@ -23,6 +23,7 @@ const Register: React.FC<ILoginProps> = (props) => {
         password: v.password,
       }
     })
+    history.push({ pathname: "/login" })
     console.log(res)
   }
 
@@ -39,7 +40,7 @@ const Register: React.FC<ILoginProps> = (props) => {
           })
         }}
       >
-        <Group renderHeader="">
+        <Group renderHeader="Register">
           <Form.Item rules={[{ required: true, message: "Please input username" }]} label="Username" name="username">
             <InputItem placeholder="Please input username" clear />
           </Form.Item>
@@ -62,7 +63,7 @@ const Register: React.FC<ILoginProps> = (props) => {
         </Group>
         <Button htmlType="submit" type="primary">Register</Button>
         <div onClick={() => {
-          history.push({ pathname: "/register" })
+          history.push({ pathname: "/login" })
         }} className="login">Has an account, go log in!</div>
       </Form >
     </div >

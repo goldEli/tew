@@ -1,5 +1,6 @@
 export { default as http } from "./http"
 export { default as timer } from "./timer"
+export { default as cookie } from "./cookie"
 
 export const getUrlParamsByKey = (key: string) => {
 

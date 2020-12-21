@@ -17,17 +17,20 @@ export default defineConfig({
         {
           path: '/order',
           component: "@/pages/order/index",
-          title: "Order"
+          title: "Order",
+          auth: true,
         },
         {
           path: '/user',
           component: "@/pages/user/index",
-          title: "User"
+          title: "User",
+          auth: true,
         },
         {
           path: '/user/edit',
           component: "@/pages/user/edit/index",
-          title: "Edit"
+          title: "Edit",
+          auth: true,
         },
         {
           path: '/search',

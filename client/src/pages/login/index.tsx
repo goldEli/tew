@@ -7,7 +7,7 @@ import {
 } from '@ant-design/mobile'
 import "./index.less"
 import { history } from "umi"
-import { http } from "@/utils"
+import { http, cookie } from "@/utils"
 
 const { Group } = Form
 
@@ -17,7 +17,8 @@ const Login: React.FC<ILoginProps> = (props) => {
   const [form] = Form.useForm()
 
   const handleFinish = async (v: any) => {
-    const res = await http({url: "/user/login", body: v})
+    const res = await http({ url: "/user/login", body: v }) as any
+    cookie.set("user", res.username)
     console.log(res)
   }
 
@@ -34,7 +35,7 @@ const Login: React.FC<ILoginProps> = (props) => {
           })
         }}
       >
-        <Group renderHeader="">
+        <Group renderHeader="Login">
           <Form.Item rules={[{ required: true, message: "Please input username" }]} label="Username" name="username">
             <InputItem placeholder="Please input username" clear />
           </Form.Item>
