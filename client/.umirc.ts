@@ -44,6 +44,16 @@ export default defineConfig({
           component: "@/pages/house",
           title: "House"
         },
+        {
+          path: '/login',
+          component: "@/pages/login",
+          title: "Login"
+        },
+        {
+          path: '/register',
+          component: "@/pages/register",
+          title: "Register"
+        },
       ]
     },
   ],
