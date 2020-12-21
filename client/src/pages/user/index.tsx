@@ -1,12 +1,15 @@
 import React from "react";
 import { List } from "antd-mobile"
 import { history } from "umi";
+import { useHttpHook } from "@/hooks";
 import "./index.less"
+import { IUserDetail } from "@/type"
 
 
 interface IUserProps { }
 
 const User: React.FC<IUserProps> = (props) => {
+    const [userDetail] = useHttpHook<IUserDetail>({ url: "/user/detail", body: { id: "123" } })
 
     const handleClick = () => {
         history.push({
@@ -24,9 +27,9 @@ const User: React.FC<IUserProps> = (props) => {
             <div className="info">
                 <div className='set' onClick={handleClick}>设置</div>
                 <div className='user'>
-                    <img alt='user' src={""} />
-                    <div className='tel'>{""}</div>
-                    <div className='sign'>{""}</div>
+                    <img alt='user' src={userDetail?.avatar} />
+                    <div className='tel'>{userDetail?.tel}</div>
+                    <div className='sign'>{userDetail?.sign}</div>
                 </div>
             </div>
             <div className="lists">

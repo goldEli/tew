@@ -8,6 +8,8 @@ import {
   unstable_InputItem as InputItem,
   unstable_Button as Button
 } from "@ant-design/mobile"
+import { http } from "@/utils"
+import { history } from "umi"
 
 const { Group, Item } = Form
 
@@ -17,12 +19,24 @@ const Edit: React.FC<IEditProps> = (props) => {
   const [form] = Form.useForm()
   const [files, setFiles] = React.useState([])
 
-  const handleChange = () => {
-
+  const handleChange = (data: any) => {
+    setFiles(data)
   }
 
-  const handleSubmit = () => {
-
+  const handleSubmit = async (v:any) => {
+    console.log(v)
+    const res = await http({
+      url: "/user/edit", body: {
+        img: v.img[0].url,
+        sign: v.sign,
+        tel: v.phone
+      }
+    })
+    if (res) {
+      history.push({
+        pathname: "/user"
+      })
+    }
   }
 
   return (
@@ -30,10 +44,7 @@ const Edit: React.FC<IEditProps> = (props) => {
       <Form
         form={form}
         ref={console.log}
-        onFinish={v => {
-          console.log(v)
-          Toast.fail(JSON.stringify(v))
-        }}
+        onFinish={handleSubmit}
         onFinishFailed={err => {
           console.log(err)
           Toast.fail(err.errorFields[0].errors[0])
@@ -42,7 +53,7 @@ const Edit: React.FC<IEditProps> = (props) => {
         <Group>
           <Item
             label="Img: "
-            name="Img"
+            name="img"
             rules={[{ required: true },
             ({ getFieldValue }) => ({
               validator(rule, value) {
@@ -70,7 +81,7 @@ const Edit: React.FC<IEditProps> = (props) => {
           </Item>
           <Item
             label="Sign: "
-            name="Sign"
+            name="sign"
             rules={[{ required: true }]}
           >
             <InputItem />
