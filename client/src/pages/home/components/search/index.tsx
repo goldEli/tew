@@ -47,7 +47,6 @@ const Search: React.FC<ISearchProps> = (props) => {
     })
   }
   const { cities = [] } = props
-  console.log(cities)
   return <div className="search">
     {/* optional cities */}
     <div className="search-addr">
@@ -79,4 +78,4 @@ const Search: React.FC<ISearchProps> = (props) => {
   </div>
 }
 
-export default Search
+export default React.memo(Search)

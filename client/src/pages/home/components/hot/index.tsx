@@ -35,4 +35,4 @@ const Hot: React.FC<IHotProps> = (props) => {
   )
 }
 
-export default Hot
+export default React.memo(Hot)
