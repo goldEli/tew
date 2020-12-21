@@ -6,6 +6,7 @@ import { useObserverHook } from "@/hooks";
 import { useLocation } from "umi"
 import { ShowLoading } from "@/components"
 import { commonEnums } from "@/enums";
+import {OrderSkeletons} from "@/skeletons"
 
 import "./index.less"
 
@@ -84,7 +85,7 @@ const Search: React.FC<ISearchProps> = (props) => {
         maxLength={8}
       />
       {/* search result */}
-      {allList.length === 0 ? <ActivityIndicator toast /> :
+      {allList.length === 0 ? <OrderSkeletons /> :
         (
           <div className="result">
             {

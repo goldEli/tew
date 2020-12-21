@@ -77,7 +77,7 @@ export default {
         status: 200,
         data,
       });
-    }, 500);
+    }, 1000);
   },
   'post /api/house/detail': (req, res) => {
     res.json({
@@ -178,7 +178,7 @@ export default {
         status: 200,
         data,
       });
-    }, 100);
+    }, 10000);
   },
   'post /api/comments/add': (req, res) => {
     res.json({
