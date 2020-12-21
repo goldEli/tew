@@ -8,6 +8,7 @@ import {
 import "./index.less"
 import { history } from "umi"
 import { http, cookie } from "@/utils"
+import { Toast } from "antd-mobile"
 
 const { Group } = Form
 
@@ -19,6 +20,11 @@ const Login: React.FC<ILoginProps> = (props) => {
   const handleFinish = async (v: any) => {
     const res = await http({ url: "/user/login", body: v }) as any
     cookie.set("user", res.username)
+    var url_string = window.location.href
+    var url = new URL(url_string);
+    var fromRoute = url.searchParams.get("from");
+    fromRoute && history.push(fromRoute);
+    Toast.success('登录成功');
     console.log(res)
   }
 
