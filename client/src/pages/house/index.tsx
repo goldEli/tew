@@ -30,6 +30,7 @@ const House: React.FC<IHouseProps> = (props) => {
   })
 
   useEffect(() => {
+    action.init()
     return () => {
       action.reset()
     }
