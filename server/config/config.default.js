@@ -43,9 +43,17 @@ module.exports = (appInfo) => {
     },
   };
 
+  config.security = {
+    csrf: {
+      enable: false,
+    },
+  };
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
+    salt: "my",
+    dayFormat: "YYYY-MM-DD HH:mm:ss",
   };
 
   return {
