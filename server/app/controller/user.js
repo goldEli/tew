@@ -47,6 +47,7 @@ class UserController extends Controller {
       };
       return
     }
+    ctx.session.userId = user.id
     ctx.body = {
       status: 200,
       data: {
