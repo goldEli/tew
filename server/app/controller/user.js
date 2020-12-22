@@ -1,14 +1,11 @@
 "use strict";
 
 const Controller = require("egg").Controller;
-const md5 = require('md5')
-const dayjs = require("dayjs")
 
 class UserController extends Controller {
   async register() {
     const { ctx, app } = this;
     const params = ctx.request.body;
-    console.log("params", params);
     const user = await ctx.service.user.getUser(params.username);
     if (user) {
       ctx.body = {
@@ -20,7 +17,7 @@ class UserController extends Controller {
 
     const res = await ctx.service.user.add({
       ...params,
-      password: md5(params.password + app.config.salt),
+      password: ctx.helper.md5(params.password),
       createTime: ctx.helper.time(),
     });
     if (res) {
@@ -36,6 +33,26 @@ class UserController extends Controller {
         status: 500,
         errMsg: "Register user failed",
       };
+    }
+  }
+
+  async login() {
+    const {ctx, app} = this
+    const {username, password} = ctx.request.body;
+    const user = await ctx.service.user.getUser(username, password)
+    if (!user) {
+      ctx.body = {
+        status: 500,
+        errMsg: "This user dose not exsit",
+      };
+      return
+    }
+    ctx.body = {
+      status: 200,
+      data: {
+        ...ctx.helper.unpick(user.dataValues, ["password"]),
+        createTime: ctx.helper.timestamp(user.dataValues.createTime)
+      }
     }
   }
 }

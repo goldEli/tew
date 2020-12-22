@@ -1,4 +1,5 @@
 const dayjs = require("dayjs")
+const md5 = require("md5")
 
 module.exports = {
   base64Encode(str = ""){
@@ -18,5 +19,8 @@ module.exports = {
       }
     }
     return obj
+  },
+  md5(password) {
+    return md5(password + "my")
   }
 }

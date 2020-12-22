@@ -3,13 +3,12 @@
 const Service = require('egg').Service
 
 class UserService extends Service {
-  async getUser(username) {
+  async getUser(username, password) {
     try {
-      const {ctx} = this
+      const {ctx, app} = this
+      const _where = password ? {username, password: ctx.helper.md5(password)} : {username}
       const result = await ctx.model.User.findOne({
-        where: {
-          username
-        }
+        where: _where
       })
       return result 
     } catch (error) {
