@@ -21,12 +21,15 @@ class UserController extends Controller {
     const res = await ctx.service.user.add({
       ...params,
       password: md5(params.password + app.config.salt),
-      createTime: dayjs().format(app.config.dayFormat),
+      createTime: ctx.helper.time(),
     });
     if (res) {
       ctx.body = {
         status: 200,
-        data: res,
+        data: {
+          ...ctx.helper.unpick(res.dataValues, ['password']),
+          createTime: ctx.header.timestamp(res.dataValues.createTime)
+        },
       };
     } else {
       ctx.body = {
