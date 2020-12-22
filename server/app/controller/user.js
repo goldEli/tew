@@ -12,7 +12,7 @@ class UserController extends Controller {
         status: 500,
         errMsg: "User already exists",
       };
-      return
+      return;
     }
 
     const res = await ctx.service.user.add({
@@ -24,8 +24,8 @@ class UserController extends Controller {
       ctx.body = {
         status: 200,
         data: {
-          ...ctx.helper.unpick(res.dataValues, ['password']),
-          createTime: ctx.header.timestamp(res.dataValues.createTime)
+          ...ctx.helper.unpick(res.dataValues, ["password"]),
+          createTime: ctx.header.timestamp(res.dataValues.createTime),
         },
       };
     } else {
@@ -37,24 +37,32 @@ class UserController extends Controller {
   }
 
   async login() {
-    const {ctx, app} = this
-    const {username, password} = ctx.request.body;
-    const user = await ctx.service.user.getUser(username, password)
+    const { ctx, app } = this;
+    const { username, password } = ctx.request.body;
+    const user = await ctx.service.user.getUser(username, password);
     if (!user) {
       ctx.body = {
         status: 500,
         errMsg: "This user dose not exsit",
       };
-      return
+      return;
     }
-    ctx.session.userId = user.id
+    const token = await app.jwt.sign(
+      {
+        username,
+      },
+      app.config.jwt.secret
+    );
+    ctx.session[username] = 1;
+
     ctx.body = {
       status: 200,
       data: {
         ...ctx.helper.unpick(user.dataValues, ["password"]),
-        createTime: ctx.helper.timestamp(user.dataValues.createTime)
-      }
-    }
+        createTime: ctx.helper.timestamp(user.dataValues.createTime),
+        token,
+      },
+    };
   }
 }
 

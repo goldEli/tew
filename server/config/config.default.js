@@ -48,6 +48,9 @@ module.exports = (appInfo) => {
       enable: false,
     },
   };
+  config.jwt = {
+    secret: "my"
+  }
 
   // add your user config here
   const userConfig = {
