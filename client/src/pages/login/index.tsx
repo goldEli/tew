@@ -7,7 +7,7 @@ import {
 } from '@ant-design/mobile'
 import "./index.less"
 import { history } from "umi"
-import { http, cookie } from "@/utils"
+import { http } from "@/utils"
 import { Toast } from "antd-mobile"
 
 const { Group } = Form
@@ -19,7 +19,8 @@ const Login: React.FC<ILoginProps> = (props) => {
 
   const handleFinish = async (v: any) => {
     const res = await http({ url: "/user/login", body: v }) as any
-    cookie.set("user", res.username)
+    localStorage.setItem('token', res.token);
+    localStorage.setItem('username', res.username);
     var url_string = window.location.href
     var url = new URL(url_string);
     var fromRoute = url.searchParams.get("from");
