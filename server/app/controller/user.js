@@ -3,6 +3,18 @@
 const Controller = require("egg").Controller;
 
 class UserController extends Controller {
+  async getToken() {
+    const { ctx, app } = this;
+    const { username } = ctx.request.body.username;
+    const token = await app.jwt.sign(
+      {
+        username,
+      },
+      app.config.jwt.secret
+    );
+    ctx.session[username] = 1;
+    return token;
+  }
   async register() {
     const { ctx, app } = this;
     const params = ctx.request.body;
@@ -21,11 +33,13 @@ class UserController extends Controller {
       createTime: ctx.helper.time(),
     });
     if (res) {
+      const token = await this.getToken();
       ctx.body = {
         status: 200,
         data: {
           ...ctx.helper.unpick(res.dataValues, ["password"]),
-          createTime: ctx.header.timestamp(res.dataValues.createTime),
+          createTime: ctx.helper.timestamp(res.dataValues.createTime),
+          token,
         },
       };
     } else {
@@ -47,13 +61,7 @@ class UserController extends Controller {
       };
       return;
     }
-    const token = await app.jwt.sign(
-      {
-        username,
-      },
-      app.config.jwt.secret
-    );
-    ctx.session[username] = 1;
+    const token = await this.getToken();
 
     ctx.body = {
       status: 200,
