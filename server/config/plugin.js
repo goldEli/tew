@@ -16,3 +16,8 @@ exports.jwt = {
   enable: true,
   package: 'egg-jwt'
 };
+
+exports.auth = {
+  enable: true,
+  package: "../lib/plugin/egg-auth"
+}

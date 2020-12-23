@@ -71,6 +71,7 @@ class UserController extends BaseController {
   async logout() {
     const {ctx} = this
     try {
+      console.log(ctx.username, "ctx.username")
       ctx.session[ctx.username] = null
       this.success()
       

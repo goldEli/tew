@@ -39,6 +39,10 @@ export default function http<T>({
     fetch('/api' + url, params)
       .then(res => res.json())
       .then(res => {
+        if (res.status === 1001) {
+          location.href = "/login"
+          localStorage.clear()
+        }
         if (res.status === 200) {
           resolve(res.data);
           setResult && setResult(res.data);

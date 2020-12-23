@@ -17,6 +17,7 @@ import 'egg-view';
 import 'egg-mysql';
 import 'egg-sequelize';
 import 'egg-jwt';
+import '../lib/plugin/egg-auth';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -35,5 +36,6 @@ declare module 'egg' {
     mysql?: EggPluginItem;
     sequelize?: EggPluginItem;
     jwt?: EggPluginItem;
+    auth?: EggPluginItem;
   }
 }

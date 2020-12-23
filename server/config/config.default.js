@@ -18,6 +18,13 @@ module.exports = (appInfo) => {
   // add your middleware config here
   config.middleware = [];
 
+  config.session = {
+    key: "session",
+    httpOnly: true,
+    maxAge: 1000 * 50,
+    renew: true
+  }
+
   config.mysql = {
     app: true,
     agent: false,
@@ -49,8 +56,12 @@ module.exports = (appInfo) => {
     },
   };
   config.jwt = {
-    secret: "my"
-  }
+    secret: "my",
+  };
+
+  config.auth = {
+    exclude: ["/api/user/login", "/api/user/register"],
+  };
 
   // add your user config here
   const userConfig = {
