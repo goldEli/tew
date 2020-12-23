@@ -4,7 +4,7 @@ const BaseController = require("./base");
 class UserController extends BaseController {
   async getToken() {
     const { ctx, app } = this;
-    const { username } = ctx.request.body.username;
+    const { username } = ctx.params();
     const token = await app.jwt.sign(
       {
         username,
@@ -16,7 +16,7 @@ class UserController extends BaseController {
   }
   async register() {
     const { ctx, app } = this;
-    const params = ctx.request.body;
+    const params = ctx.params();
     const user = await ctx.service.user.getUser(params.username);
     if (user) {
       this.error("User already exists");
@@ -43,7 +43,7 @@ class UserController extends BaseController {
 
   async login() {
     const { ctx, app } = this;
-    const { username, password } = ctx.request.body;
+    const { username, password } = ctx.params();
     const user = await ctx.service.user.getUser(username, password);
     if (!user) {
       this.error("This user dose not exsit");
@@ -55,6 +55,29 @@ class UserController extends BaseController {
       createTime: ctx.helper.timestamp(user.dataValues.createTime),
       token,
     });
+  }
+
+  async detail() {
+    const { ctx, app } = this;
+    const user = await this.ctx.service.user.getUser(ctx.username || "");
+    if (!user) {
+      this.error("This user dose not exsit");
+      return;
+    }
+    this.success({
+      ...ctx.helper.unpick(user.dataValues, ["password"]),
+    });
+  }
+  async logout() {
+    const {ctx} = this
+    try {
+      ctx.session[ctx.username] = null
+      this.success()
+      
+    } catch (error) {
+      this.error("Logout error")
+      
+    }
   }
 }
 

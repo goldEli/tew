@@ -16,10 +16,17 @@ export default function http<T>({
   setLoading && setLoading(true);
 
   let params: RequestInit
+  const defaultHeaders: {[key:string]: string} = {
+    'Content-Type': 'application/json',
+  }
+  const token = localStorage.getItem("token")
+  if (token) {
+    defaultHeaders['token'] = token
+  }
   if (!(method.toUpperCase() === 'GET')) {
     params = {
       headers: {
-        'Content-Type': 'application/json',
+        ...defaultHeaders,
         ...headers
       },
       method,
