@@ -16,7 +16,7 @@ module.exports = (appInfo) => {
   config.keys = appInfo.name + "_1608620426910_8213";
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ["httpLog"];
 
   config.session = {
     key: "session",
