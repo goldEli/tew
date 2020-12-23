@@ -12,8 +12,14 @@ class UserController extends BaseController {
       app.config.jwt.secret
     );
     // ctx.session[username] = 1;
-    await app.redis.set(username, token, 'EX', app.config.redisExpire)
+    await app.redis.set(username, token, "EX", app.config.redisExpire);
     return token;
+  }
+  async parseResult(ctx, res) {
+    return {
+      ...ctx.helper.unpick(res.dataValues, ["password"]),
+      createTime: ctx.helper.timestamp(res.dataValues.createTime),
+    };
   }
   async register() {
     const { ctx, app } = this;
@@ -33,8 +39,7 @@ class UserController extends BaseController {
       const token = await this.getToken();
 
       this.success({
-        ...ctx.helper.unpick(res.dataValues, ["password"]),
-        createTime: ctx.helper.timestamp(res.dataValues.createTime),
+        ...this.parseResult(ctx, res),
         token,
       });
     } else {
@@ -52,8 +57,7 @@ class UserController extends BaseController {
     }
     const token = await this.getToken();
     this.success({
-      ...ctx.helper.unpick(user.dataValues, ["password"]),
-      createTime: ctx.helper.timestamp(user.dataValues.createTime),
+      ...this.parseResult(ctx, user),
       token,
     });
   }
@@ -66,20 +70,18 @@ class UserController extends BaseController {
       return;
     }
     this.success({
-      ...ctx.helper.unpick(user.dataValues, ["password"]),
+      ...this.parseResult(ctx, user)
     });
   }
   async logout() {
-    const {ctx, app} = this
+    const { ctx, app } = this;
     try {
       // ctx.session[ctx.username] = null
-      await app.redis.del(ctx.username)
-      app
-      this.success()
-      
+      await app.redis.del(ctx.username);
+      app;
+      this.success();
     } catch (error) {
-      this.error("Logout error")
-      
+      this.error("Logout error");
     }
   }
 }
