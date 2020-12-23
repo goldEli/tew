@@ -10,6 +10,8 @@ import {
 } from "@ant-design/mobile"
 import { http } from "@/utils"
 import { history } from "umi"
+import { useHttpHook } from "@/hooks";
+import { IUserDetail } from "@/type"
 
 const { Group, Item } = Form
 
@@ -17,19 +19,19 @@ interface IEditProps { }
 
 const Edit: React.FC<IEditProps> = (props) => {
   const [form] = Form.useForm()
-  const [files, setFiles] = React.useState([])
+  const [userDetail, loading] = useHttpHook<IUserDetail>({ url: "/user/detail", body: { id: "123" } })
+  const [files, setFiles] = React.useState([{ url: userDetail?.avatar || "" }])
 
   const handleChange = (data: any) => {
     setFiles(data)
   }
 
-  const handleSubmit = async (v:any) => {
-    console.log(v)
+  const handleSubmit = async (v: any) => {
     const res = await http({
       url: "/user/edit", body: {
-        img: v.img[0].url,
+        avatar: v.avatar[0].url,
         sign: v.sign,
-        tel: v.phone
+        phone: v.phone
       }
     })
     if (res) {
@@ -41,75 +43,64 @@ const Edit: React.FC<IEditProps> = (props) => {
 
   return (
     <div className='user-edit'>
-      <Form
-        form={form}
-        ref={console.log}
-        onFinish={handleSubmit}
-        onFinishFailed={err => {
-          console.log(err)
-          Toast.fail(err.errorFields[0].errors[0])
-        }}
-      >
-        <Group>
-          <Item
-            label="Img: "
-            name="img"
-            rules={[{ required: true },
-            ({ getFieldValue }) => ({
-              validator(rule, value) {
+      {
+        !loading && (
 
-                if (!value || value[0]?.file?.size / 1024 / 1024 <= 0.5) {
-                  return Promise.resolve();
-                }
-                return Promise.reject('Image size must less than 0.5M');
-              },
-            }),
-            ]}
+          <Form
+            form={form}
+            ref={console.log}
+            initialValues={{
+              avatar: [{ url: userDetail?.avatar || "" }],
+              phone: userDetail?.phone,
+              sign: userDetail?.sign
+            }}
+            onFinish={handleSubmit}
+            onFinishFailed={err => {
+              console.log(err)
+              Toast.fail(err.errorFields[0].errors[0])
+            }}
           >
-            <ImagePicker
-              files={files}
-              selectable={files.length < 1}
-              onChange={handleChange}
-            />
-          </Item>
-          <Item
-            label="Phone: "
-            name="phone"
-            rules={[{ required: true }]}
-          >
-            <InputItem />
-          </Item>
-          <Item
-            label="Sign: "
-            name="sign"
-            rules={[{ required: true }]}
-          >
-            <InputItem />
-          </Item>
-        </Group>
-        <Button type="primary" htmlType="submit">修改</Button>
-      </Form>
-      {/* <List>
-        <List.Item>
-          <ImagePicker
-            files={files}
-            selectable={files.length < 1}
-            onChange={handleChange}
-          />
-        </List.Item>
-        <List.Item>
-          <InputItem
-          >
-            电话：
-          </InputItem>
-        </List.Item>
-        <List.Item>
-          <InputItem
-          >
-            签名：
-          </InputItem>
-        </List.Item>
-      </List> */}
+            <Group>
+              <Item
+                label="Img: "
+                name="avatar"
+                rules={[{ required: true },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    console.log(123, value)
+                    if (!value || !value[0]?.file ||value[0]?.file?.size / 1024 / 1024 <= 0.5) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject('Image size must less than 0.5M');
+                  },
+                }),
+                ]}
+              >
+                <ImagePicker
+                  files={files}
+                  selectable={files.length < 1}
+                  onChange={handleChange}
+                />
+              </Item>
+              <Item
+                label="Phone: "
+                name="phone"
+                rules={[{ required: true }]}
+              >
+                <InputItem />
+              </Item>
+              <Item
+                label="Sign: "
+                name="sign"
+                rules={[{ required: true }]}
+              >
+                <InputItem />
+              </Item>
+            </Group>
+            <Button type="primary" htmlType="submit">修改</Button>
+          </Form>
+        )
+      }
     </div>
   )
 }

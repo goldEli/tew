@@ -37,7 +37,7 @@ const User: React.FC<IUserProps> = (props) => {
                 <div className='set' onClick={handleClick}>设置</div>
                 <div className='user'>
                     <img alt='user' src={userDetail?.avatar || require("../../assets/blank.png")} />
-                    <div className='tel'>{userDetail?.tel}</div>
+                    <div className='tel'>{userDetail?.phone}</div>
                     <div className='sign'>{userDetail?.sign}</div>
                 </div>
             </div>

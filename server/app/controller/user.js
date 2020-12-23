@@ -15,7 +15,8 @@ class UserController extends BaseController {
     await app.redis.set(username, token, "EX", app.config.redisExpire);
     return token;
   }
-  async parseResult(ctx, res) {
+  parseResult(ctx, res) {
+    // console.log(res, res.dataValues)
     return {
       ...ctx.helper.unpick(res.dataValues, ["password"]),
       createTime: ctx.helper.timestamp(res.dataValues.createTime),
@@ -63,7 +64,7 @@ class UserController extends BaseController {
   }
 
   async detail() {
-    const { ctx, app } = this;
+    const { ctx } = this;
     const user = await this.ctx.service.user.getUser(ctx.username || "");
     if (!user) {
       this.error("This user dose not exsit");
@@ -82,6 +83,15 @@ class UserController extends BaseController {
       this.success();
     } catch (error) {
       this.error("Logout error");
+    }
+  }
+  async edit() {
+    const {ctx} = this;
+    const res = await this.service.user.edit(ctx.params())
+    if (res) {
+      this.success(res)
+    } else {
+      this.error("edit fail!")
     }
   }
 }
