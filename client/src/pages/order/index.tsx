@@ -6,6 +6,7 @@ import { IOrderItem } from "@/type";
 import { useObserverHook } from "@/hooks"
 import { http } from "@/utils";
 import { isEmpty } from "lodash"
+import { ErrorBoundary } from "@/components";
 
 import "./index.less"
 
@@ -87,19 +88,21 @@ const Order: React.FC<IOrderProps> = (props) => {
     }, [type])
 
     return (
-        <div className='order-page'>
-            <Tabs
-                tabs={tabs}
-                onChange={handleChange}
-            >
-                <div className='tab'>
-                    <Lists orders={orders} type={0} showLoading={showLoading} />
-                </div>
-                <div className='tab'>
-                    <Lists orders={orders} type={1} showLoading={showLoading} />
-                </div>
-            </Tabs>
-        </div>
+        <ErrorBoundary>
+            <div className='order-page'>
+                <Tabs
+                    tabs={tabs}
+                    onChange={handleChange}
+                >
+                    <div className='tab'>
+                        <Lists orders={orders} type={0} showLoading={showLoading} />
+                    </div>
+                    <div className='tab'>
+                        <Lists orders={orders} type={1} showLoading={showLoading} />
+                    </div>
+                </Tabs>
+            </div>
+        </ErrorBoundary>
     )
 }
 

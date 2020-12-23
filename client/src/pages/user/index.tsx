@@ -5,6 +5,7 @@ import { useHttpHook } from "@/hooks";
 import "./index.less"
 import { IUserDetail } from "@/type"
 import { http } from "@/utils";
+import { ErrorBoundary } from "@/components";
 
 
 interface IUserProps { }
@@ -26,30 +27,32 @@ const User: React.FC<IUserProps> = (props) => {
             url: "/user/logout"
         })
         localStorage.clear()
-        location.href = "/login?from="+location.pathname
+        location.href = "/login?from=" + location.pathname
     }
 
     return (
-
-        <div className="user-page">
-            {/* 用户信息 */}
-            <div className="info">
-                <div className='set' onClick={handleClick}>设置</div>
-                <div className='user'>
-                    <img alt='user' src={userDetail?.avatar || require("../../assets/blank.png")} />
-                    <div className='tel'>{userDetail?.phone}</div>
-                    <div className='sign'>{userDetail?.sign}</div>
+        <ErrorBoundary>
+            <div className="user-page">
+                {/* 用户信息 */}
+                <div className="info">
+                    <div className='set' onClick={handleClick}>设置</div>
+                    <div className='user'>
+                        <img alt='user' src={userDetail?.avatar || require("../../assets/blank.png")} />
+                        <div className='tel'>{userDetail?.phone}</div>
+                        <div className='sign'>{userDetail?.sign}</div>
+                    </div>
                 </div>
+                <div className="lists">
+                    <List>
+                        <List.Item arrow='horizontal'> 用户协议 </List.Item>
+                        <List.Item arrow='horizontal'> 常见问题 </List.Item>
+                        <List.Item arrow='horizontal'> 联系客服 </List.Item>
+                    </List>
+                </div>
+                <Button onClick={handleLogout} type="warning">Log out</Button>
             </div>
-            <div className="lists">
-                <List>
-                    <List.Item arrow='horizontal'> 用户协议 </List.Item>
-                    <List.Item arrow='horizontal'> 常见问题 </List.Item>
-                    <List.Item arrow='horizontal'> 联系客服 </List.Item>
-                </List>
-            </div>
-            <Button onClick={handleLogout} type="warning">Log out</Button>
-        </div>
+
+        </ErrorBoundary>
     )
 }
 
