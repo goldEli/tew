@@ -58,6 +58,14 @@ module.exports = (appInfo) => {
   config.jwt = {
     secret: "my",
   };
+  config.redis = {
+    client: {
+      port: 6379,
+      host: "127.0.0.1",
+      password: "123456",
+      db: 0
+    }
+  }
 
   config.auth = {
     exclude: ["/api/user/login", "/api/user/register"],
@@ -68,6 +76,7 @@ module.exports = (appInfo) => {
     // myAppName: 'egg',
     salt: "my",
     dayFormat: "YYYY-MM-DD HH:mm:ss",
+    redisExpire: 60*60*24
   };
 
   return {

@@ -17,6 +17,11 @@ exports.jwt = {
   package: 'egg-jwt'
 };
 
+exports.redis = {
+  enable: true,
+  package: 'egg-redis'
+};
+
 exports.auth = {
   enable: true,
   package: "../lib/plugin/egg-auth"

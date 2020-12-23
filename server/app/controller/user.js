@@ -11,7 +11,8 @@ class UserController extends BaseController {
       },
       app.config.jwt.secret
     );
-    ctx.session[username] = 1;
+    // ctx.session[username] = 1;
+    await app.redis.set(username, token, 'EX', app.config.redisExpire)
     return token;
   }
   async register() {
@@ -69,10 +70,11 @@ class UserController extends BaseController {
     });
   }
   async logout() {
-    const {ctx} = this
+    const {ctx, app} = this
     try {
-      console.log(ctx.username, "ctx.username")
-      ctx.session[ctx.username] = null
+      // ctx.session[ctx.username] = null
+      await app.redis.del(ctx.username)
+      app
       this.success()
       
     } catch (error) {

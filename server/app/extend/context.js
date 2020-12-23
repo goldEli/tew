@@ -12,7 +12,6 @@ module.exports = {
     const tokenCache = token
       ? this.app.jwt.verify(token, this.app.config.jwt.secret)
       : undefined;
-    console.log(tokenCache, this.app.config.jwt.secret)
     return tokenCache ? tokenCache.username : undefined  
   },
 };
