@@ -19,6 +19,7 @@ import 'egg-sequelize';
 import 'egg-jwt';
 import 'egg-redis';
 import '../lib/plugin/egg-auth';
+import '../lib/plugin/egg-notFound';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -39,5 +40,6 @@ declare module 'egg' {
     jwt?: EggPluginItem;
     redis?: EggPluginItem;
     auth?: EggPluginItem;
+    notFound?: EggPluginItem;
   }
 }

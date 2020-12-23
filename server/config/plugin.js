@@ -1,4 +1,5 @@
 'use strict';
+const path = require("path")
 
 /** @type Egg.EggPlugin */
 
@@ -24,5 +25,13 @@ exports.redis = {
 
 exports.auth = {
   enable: true,
-  package: "../lib/plugin/egg-auth"
+  package: "../lib/plugin/egg-auth",
+  // package: path.join(__dirname, "../lib/plugin/egg-auth"),
 }
+
+exports.notFound = {
+  enable: true,
+  package: "../lib/plugin/egg-notFound"
+}
+
+

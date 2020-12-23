@@ -20,9 +20,9 @@ export default class ErrorBoundary extends Component {
   /* error: 抛出的错误
    * info: 带有 componentStack key 的对象，其中包含有关组件引发错误的栈信息
   */
-  componentDidCatch(error, info) {
+  // componentDidCatch(error, info) {
 
-  }
+  // }
 
   render() {
     return (
