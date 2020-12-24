@@ -2,7 +2,7 @@ import React from "react";
 import AwesomeSwiper from 'react-awesome-swiper';
 
 interface IBannerProps {
-  list?: string[]
+  list?: {url: string}[]
 }
 
 const Banner: React.FC<IBannerProps> = (props) => {
@@ -41,7 +41,7 @@ const Banner: React.FC<IBannerProps> = (props) => {
         {
           props?.list?.map((item, idx) => (
             <div className="swiper-slide">
-              <img alt="img" key={idx.toString()} src={item}></img>
+              <img alt="img" key={idx.toString()} src={item.url}></img>
             </div>
           ))
         }
