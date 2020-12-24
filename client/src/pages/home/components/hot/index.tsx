@@ -22,7 +22,7 @@ const Hot: React.FC<IHotProps> = (props) => {
           props.houses?.map(item => (
 
             <div onClick={() => { handleClick(item.id.toString()) }} key={item.id} className="hot-lists-item">
-              <img className="img" src={item.img}></img>
+              <img className="img" src={item.imgs[0].url}></img>
               <div className="title">{item.title}</div>
               <div className="info">{item.info}</div>
               <div className="price">￥{item.price}</div>

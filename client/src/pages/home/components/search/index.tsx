@@ -12,7 +12,7 @@ const DATE_FORMATE = 'YYYY-MM-DD'
 
 const Search: React.FC<ISearchProps> = (props) => {
   // const [cities, setCities] = React.useState([[{ label: '杭州', value: '10001' }, { label: '苏州', value: '10002' }]])
-  const [selectedCites, setSelectedCites] = React.useState(["10001"])
+  const [selectedCites, setSelectedCites] = React.useState([])
   const [calendarVisible, setCalendarVisible] = React.useState(false)
   const [date, setDate] = React.useState("select")
 

@@ -12,10 +12,10 @@ interface IHomeProps { }
 
 const Home: React.FC<IHomeProps> = (props) => {
   const [cities, citiesLoading] = useHttpHook<ICities>({
-    url: "/common/cities"
+    url: "/common/cities", initData: []
   })
   const [houses, housesLoading] = useHttpHook<IHouses>({
-    url: "/common/houses/hot"
+    url: "/house/hot", initData: []
   })
   return (
     <ErrorBoundary>
