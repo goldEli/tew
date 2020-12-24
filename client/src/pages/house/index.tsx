@@ -26,7 +26,6 @@ const House: React.FC<IHouseProps> = (props) => {
   const [order, setOrder] = React.useState<IOrderInfo>({})
 
   useObserverHook('#' + commonEnums.LOADING_ID, (entries) => {
-    // console.log(commentListLoading, entries[0].isIntersecting);
     if (!commentListLoading && entries[0].isIntersecting) {
       action.nextPage()
     }
@@ -49,11 +48,10 @@ const House: React.FC<IHouseProps> = (props) => {
         id: query.id,
       }
     }) as IOrderInfo
-    console.log(res, "---res")
     setOrder(res || {})
   }
 
-  async function btnClick(id?: string) {
+  async function btnClick(id?: number) {
     if (!id) {
       await http({
         url: "/orders/addOrder",

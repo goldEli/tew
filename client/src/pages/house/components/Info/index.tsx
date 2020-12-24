@@ -6,14 +6,13 @@ import { IHouseDetail, IOrderInfo } from "@/type"
 interface IInfoProps {
   detail?: IHouseDetail,
   order?: IOrderInfo,
-  btnClick: (id?: string) => void
+  btnClick: (id?: number) => void
 
 }
 
 const Info: React.FC<IInfoProps> = (props) => {
-  console.log(props)
 
-  const handleOrder = (id?: string) => {
+  const handleOrder = (id?: number) => {
     props?.btnClick(id)
   }
 
