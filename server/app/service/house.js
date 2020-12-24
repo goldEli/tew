@@ -29,7 +29,7 @@ class HotService extends BaseService {
     const { ctx, app } = this;
     const {lte, gte} = app.Sequelize.Op
     const where = {
-      cityCode: params.code,
+      cityCode: Array.isArray(params.code) ? params.code[0] : params.code,
       startTime: {
         [lte]: params.startTime
       },
