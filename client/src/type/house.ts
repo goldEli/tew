@@ -22,7 +22,7 @@ export type ICities = {
 export type IHouses = {
   id: number,
   imgs: {url: string}[],
-  title: string,
+  name: string,
   info: string,
   price: number
 }[]
