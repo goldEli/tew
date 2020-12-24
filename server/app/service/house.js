@@ -27,7 +27,7 @@ class HotService extends BaseService {
   }
   async search(params) {
     const { ctx, app } = this;
-    const {lte, gte} = app.Sequelize.Op
+    const {lte, gte, like} = app.Sequelize.Op
     const where = {
       cityCode: Array.isArray(params.code) ? params.code[0] : params.code,
       startTime: {
@@ -35,7 +35,13 @@ class HotService extends BaseService {
       },
       endTime: {
         [gte]: params.endTime
+      },
+      name: {
+        [like]: `%${params.houseName}%`
       }
+    }
+    if (!params.houseName) {
+      delete where.name
     }
     return this.run(async () => {
       return await ctx.model.House.findAll({
