@@ -24,7 +24,11 @@ const Login: React.FC<ILoginProps> = (props) => {
     var url_string = window.location.href
     var url = new URL(url_string);
     var fromRoute = url.searchParams.get("from");
-    fromRoute && history.push(fromRoute);
+    if (fromRoute) {
+      history.push(fromRoute);
+    } else {
+      history.push("/");
+    }
     Toast.success('登录成功');
     console.log(res)
   }
