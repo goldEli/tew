@@ -1,13 +1,12 @@
-export interface IOrderItem {
-  id: number,
-  img: string,
-  title: string,
-  info: string,
-  price: string,
-  createTime: string,
-}
 
 export interface IOrderInfo {
   id?: number,
   isPayed?: number
+  createTime?: string,
+  house?: {
+    imgs: {url: string} [],
+    name: string,
+    info: string,
+    price: string,
+  }
 }

@@ -1,10 +1,10 @@
 import React from "react";
 import { Button } from "antd-mobile"
-import { IOrderItem } from "@/type";
+import { IOrderInfo } from "@/type";
 
 type IItemProps = {
     type: number,
-} & IOrderItem
+} & IOrderInfo
 
 const Item: React.FC<IItemProps> = (props) => {
 
@@ -21,10 +21,10 @@ const Item: React.FC<IItemProps> = (props) => {
 
     return (
         <div className='order-item'>
-            <img alt='order' src={props?.img} />
+            <img alt='order' src={props?.house?.imgs[0].url} />
             <div className='center'>
-                <div className='title'>{props?.title}</div>
-                <div className='price'>￥{props?.price}</div>
+                <div className='title'>{props?.house?.name}</div>
+                <div className='price'>￥{props?.house?.price}</div>
                 <div className='time'>{props?.createTime}</div>
             </div>
             <div className='pay'>

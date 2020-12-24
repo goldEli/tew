@@ -2,9 +2,9 @@ const Service = require('egg').Service;
 
 class BaseService extends Service {
   async run(callback) {
-    const {ctx} = this
+    const {ctx, app} = this
     try {
-      return callback && callback(ctx)
+      return callback && callback(ctx, app)
     } catch (error) {
       console.log(error)
       return null

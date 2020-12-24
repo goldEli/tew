@@ -3,10 +3,10 @@ import { isEmpty } from "lodash";
 import OrderItem from '../Item';
 import { ShowLoading } from '@/components';
 import { OrderSkeletons } from '@/skeletons';
-import { IOrderItem } from "@/type";
+import { IOrderInfo } from "@/type";
 
 interface IListsProps {
-    orders?: IOrderItem[],
+    orders?: IOrderInfo[],
     type: number,
     showLoading: boolean
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Tabs } from "antd-mobile";
 import { commonEnums } from "@/enums";
 import Lists from "./components/Lists"
-import { IOrderItem } from "@/type";
+import { IOrderInfo } from "@/type";
 import { useObserverHook } from "@/hooks"
 import { http } from "@/utils";
 import { isEmpty } from "lodash"
@@ -14,7 +14,7 @@ interface IOrderProps { }
 
 const Order: React.FC<IOrderProps> = (props) => {
     const [page, setPage] = useState(commonEnums.PAGE);
-    const [orders, setOrders] = useState<IOrderItem[]>([]);
+    const [orders, setOrders] = useState<IOrderInfo[]>([]);
     const [showLoading, setShowLoading] = useState(true);
     const [type, setType] = useState(0);
     // const [orders] = useHttpHook({
@@ -26,7 +26,7 @@ const Order: React.FC<IOrderProps> = (props) => {
 
     const invokeHttp = async (pageNum: number) => {
         const result = await http({
-            url: '/order/lists',
+            url: '/orders/lists',
             body: {
                 ...page,
                 pageNum,
@@ -38,8 +38,8 @@ const Order: React.FC<IOrderProps> = (props) => {
 
     const fetchOrder = async (pageNum: number) => {
 
-        const result = await invokeHttp(pageNum) as IOrderItem[];
-        if (!isEmpty(result) && result.length === page.pageSize) {
+        const result = await invokeHttp(pageNum) as IOrderInfo[];
+        if (!isEmpty(result) && result.length <= page.pageSize) {
             setOrders(result);
             setShowLoading(true);
         } else {
@@ -69,7 +69,7 @@ const Order: React.FC<IOrderProps> = (props) => {
     useObserverHook('#' + commonEnums.LOADING_ID, async (entries) => {
         console.log(entries)
         if (entries[0].isIntersecting) {
-            const result = await invokeHttp(page.current + 1) as IOrderItem[];
+            const result = await invokeHttp(page.current + 1) as IOrderInfo[];
             if (!isEmpty(orders) && !isEmpty(result) && result.length === page.pageSize) {
                 setOrders([...orders, ...result]);
                 setPage({
