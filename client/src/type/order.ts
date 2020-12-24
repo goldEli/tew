@@ -6,3 +6,8 @@ export interface IOrderItem {
   price: string,
   createTime: string,
 }
+
+export interface IOrderInfo {
+  id?: number,
+  isPayed?: number
+}

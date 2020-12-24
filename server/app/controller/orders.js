@@ -4,8 +4,9 @@ const BaseController = require('./base');
 class OrdersController extends BaseController {
   async hasOrder() {
     const { ctx, app } = this;
+    const user = await ctx.service.user.getUser(ctx.username)
     const result = await ctx.service.orders.hasOrder({
-      userId: ctx.userId,
+      userId: user.id,
       houseId: ctx.params('id')
     });
 
@@ -14,8 +15,9 @@ class OrdersController extends BaseController {
 
   async addOrder() {
     const { ctx, app } = this;
+    const user = await ctx.service.user.getUser(ctx.username)
     const result = await ctx.service.orders.addOrder({
-      userId: ctx.userId,
+      userId: user.id,
       houseId: ctx.params('id'),
       isPayed: 0,
       createTime: ctx.helper.time()
@@ -33,9 +35,10 @@ class OrdersController extends BaseController {
 
   async lists() {
     const { ctx, app } = this;
+    const user = await ctx.service.user.getUser(ctx.username)
     const result = await ctx.service.orders.lists({
       ...ctx.params(),
-      userId: ctx.userId
+      userId: user.id
     });
 
     this.success(result);

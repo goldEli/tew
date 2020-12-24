@@ -7,6 +7,8 @@ import useCommentList from "./hooks/useCommentList"
 import { useLocation } from "umi";
 import { useHttpHook, useObserverHook } from "@/hooks"
 import { commonEnums } from "@/enums"
+import { IOrderInfo } from "@/type";
+import { http } from "@/utils"
 // import useHouseDetail from "./useHouseDetail";
 import './index.less';
 
@@ -21,6 +23,7 @@ const House: React.FC<IHouseProps> = (props) => {
       info: {}
     }, body: { id: query.id }
   })
+  const [order, setOrder] = React.useState<IOrderInfo>({})
 
   useObserverHook('#' + commonEnums.LOADING_ID, (entries) => {
     // console.log(commentListLoading, entries[0].isIntersecting);
@@ -35,13 +38,47 @@ const House: React.FC<IHouseProps> = (props) => {
       action.reset()
     }
   }, [])
+  useEffect(() => {
+    getOrder()
+  }, [])
+
+  const getOrder = async () => {
+    const res = await http({
+      url: "/orders/hasOrder",
+      body: {
+        id: query.id,
+      }
+    }) as IOrderInfo
+    console.log(res, "---res")
+    setOrder(res || {})
+  }
+
+  async function btnClick(id?: string) {
+    if (!id) {
+      await http({
+        url: "/orders/addOrder",
+        body: {
+          id: query?.id
+        }
+      })
+      getOrder()
+    } else {
+      await http({
+        url: "/orders/delOrder",
+        body: {
+          id: order.id
+        }
+      })
+      getOrder()
+    }
+  }
 
   return (
     <div className="house-page">
       {/* banner */}
       <Banner list={detail?.banner} />
       {/* info */}
-      <Info detail={detail?.info} />
+      <Info btnClick={btnClick} detail={detail?.info} order={order} />
       {/* comment list */}
       <CommentList lists={allCommenList} showLoading={showLoading} />
       {/* footer */}
