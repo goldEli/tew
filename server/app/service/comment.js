@@ -19,7 +19,7 @@ class CommentService extends BaseService {
         include: [
           {
             model: ctx.model.User,
-            attributes: ["avatar"]
+            attributes: ["avatar", "username"]
           }
         ]
       });

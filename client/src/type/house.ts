@@ -1,7 +1,9 @@
 export type HouseCommentList = {
   id?: string,
-  user?: {avatar: string},
-  username?: string,
+  user?: {
+    avatar: string,
+    username?: string,
+  },
   createTime?: number,
   msg?: string,
 }[]
@@ -21,7 +23,7 @@ export type ICities = {
 
 export type IHouses = {
   id: number,
-  imgs: {url: string}[],
+  imgs: { url: string }[],
   name: string,
   info: string,
   price: number
