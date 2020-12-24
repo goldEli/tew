@@ -12,7 +12,7 @@ interface IHomeProps { }
 
 const Home: React.FC<IHomeProps> = (props) => {
   const [cities, citiesLoading] = useHttpHook<ICities>({
-    url: "/common/cities", initData: []
+    url: "/commons/cities", initData: []
   })
   const [houses, housesLoading] = useHttpHook<IHouses>({
     url: "/house/hot", initData: []
