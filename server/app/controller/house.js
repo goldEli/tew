@@ -7,6 +7,11 @@ class HouseController extends BaseController {
     console.log(result)
     this.success(result)
   }
+  async search() {
+    const {ctx} = this;
+    const result = await ctx.service.house.search(ctx.params())
+    this.success(result)
+  }
 }
 
 module.exports = HouseController;

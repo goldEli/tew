@@ -30,20 +30,22 @@ const MenuBar: React.FC<IMenuBarProps> = (props) => {
     },
   ])
   return (
-    <TabBar hidden={!props.show}>
-      {
-        items.map(item => {
-          return <TabBar.Item
-            key={item.link}
-            title={item.title}
-            icon={item.icon}
-            selectedIcon={item.selectedIcon}
-            selected={props.pathname === item.link}
-            onPress={() => history.push(item.link)}
-          />
-        })
-      }
-    </TabBar>
+    <div className="menu-bar">
+      <TabBar hidden={!props.show}>
+        {
+          items.map(item => {
+            return <TabBar.Item
+              key={item.link}
+              title={item.title}
+              icon={item.icon}
+              selectedIcon={item.selectedIcon}
+              selected={props.pathname === item.link}
+              onPress={() => history.push(item.link)}
+            />
+          })
+        }
+      </TabBar>
+    </div>
   )
 }
 

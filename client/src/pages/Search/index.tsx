@@ -93,7 +93,7 @@ const Search: React.FC<ISearchProps> = (props) => {
                 return (
                   <div className='item' key={item.id} >
 
-                    <img className='search-item-img' data-src={item.img} alt='img' src={require("../../assets/blank.png")} />
+                    <img className='search-item-img' data-src={item?.imgs[0]?.url} alt='img' src={require("../../assets/blank.png")} />
                     <div className='item-right'>
                       <div className='title'>{item.title}</div>
                       <div className='price'>{item.price}</div>
