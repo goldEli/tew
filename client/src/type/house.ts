@@ -1,9 +1,9 @@
 export type HouseCommentList = {
   id?: string,
-  avatar?: string,
+  user?: {avatar: string},
   username?: string,
   createTime?: number,
-  info?: string,
+  msg?: string,
 }[]
 
 export interface IHouseDetail {

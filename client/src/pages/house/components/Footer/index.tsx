@@ -1,13 +1,15 @@
 import React from "react";
 import { Button, TextareaItem, Modal, Toast } from "antd-mobile";
 import useCommentList from "../../hooks/useCommentList";
+import { useLocation } from "umi"
 
 interface IFooterProps { }
 
 const Footer: React.FC<IFooterProps> = (props) => {
   const [visible, setVisible] = React.useState(false)
   const [commentVal, setVommentVal] = React.useState("")
-  const {action} = useCommentList()
+  const { action } = useCommentList()
+  const { query } = useLocation()
 
   const handleClick = () => {
     setVisible(true)
@@ -23,7 +25,10 @@ const Footer: React.FC<IFooterProps> = (props) => {
       Toast.fail("Please input comment !")
       return
     }
-    action.add()
+    action.add({
+      comment: commentVal,
+      houseId: query?.id as string
+    })
     handleClose()
 
   }

@@ -11,7 +11,7 @@ interface IReturnType {
   commentListLoading: boolean;
   showLoading: boolean;
   action: {
-    add: () => void;
+    add: (data: {houseId: string, comment: string}) => void;
     reset: () => void;
     nextPage: () => void;
     init: () => void;
@@ -41,7 +41,7 @@ function useCommentList(): IReturnType {
     async function func() {
       setCommentListLoading(true)
       const res = await http({
-        url: "/comments/lists",
+        url: "/comment/list",
         body: params
       }) as HouseCommentList
       setCommentListLoading(false)
@@ -78,9 +78,10 @@ function useCommentList(): IReturnType {
     setAllCommenList([])
   }
 
-  async function add() {
+  async function add(data: {houseId: string, comment: string}) {
     const res = await http({
-      url: "/comments/add"
+      url: "/comment/add",
+      body: data
     })
     if (res) {
       reset()

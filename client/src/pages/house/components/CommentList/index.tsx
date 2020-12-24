@@ -15,14 +15,14 @@ const CommentList: React.FC<ICommentListProps> = (props) => {
       <div className='comment-lists'>
         {props?.lists?.map(item => (
           <div className='comment-lists_item' key={item?.id}>
-            <img alt='user' className='avatar' src={item?.avatar} />
+            <img alt='user' className='avatar' src={item?.user?.avatar} />
             <div className='right'>
               <div className='right-top'>
                 <p>{item?.username}</p>
                 <p>{timer(item?.createTime)}</p>
               </div>
               <div className='right-bottom'>
-                {item?.info}
+                {item?.msg}
               </div>
             </div>
           </div>

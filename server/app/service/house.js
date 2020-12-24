@@ -53,7 +53,7 @@ class HotService extends BaseService {
     });
   }
   async detail(id) {
-    const { ctx, app } = this;
+    const { ctx } = this;
     return this.run(async () => {
       const res = await ctx.model.House.findOne({
         where: {
@@ -61,7 +61,7 @@ class HotService extends BaseService {
         },
         include: [
           {
-            model: app.model.Imgs,
+            model: ctx.model.Imgs,
             attributes: ["url"],
           },
         ],
