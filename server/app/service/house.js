@@ -55,7 +55,7 @@ class HotService extends BaseService {
   async detail(id) {
     const { ctx, app } = this;
     return this.run(async () => {
-      return await ctx.model.House.findOne({
+      const res = await ctx.model.House.findOne({
         where: {
           id,
         },
@@ -66,6 +66,19 @@ class HotService extends BaseService {
           },
         ],
       });
+
+      await ctx.model.House.update(
+        {
+          showCount: res.showCount + 1,
+        },
+        {
+          where: {
+            id,
+          },
+        }
+      );
+
+      return res;
     });
   }
 }
