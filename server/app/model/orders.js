@@ -7,7 +7,7 @@ module.exports = app => {
       primaryKey: true,
       autoIncrement: true
     },
-    // orderNumber: STRING(20),
+    orderNumber: STRING(20),
     userId: INTEGER,
     houseId: INTEGER,
     isPayed: {

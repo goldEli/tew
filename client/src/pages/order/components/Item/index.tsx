@@ -1,7 +1,7 @@
 import React from "react";
-import { Button } from "antd-mobile"
+import { Button, Toast } from "antd-mobile"
 import { IOrderInfo } from "@/type";
-import { timer } from "@/utils";
+import { timer, http } from "@/utils";
 
 type IItemProps = {
     type: number,
@@ -12,13 +12,26 @@ const Item: React.FC<IItemProps> = (props) => {
     const renderPay = () => {
         switch (props.type) {
             case 0:
-                return <Button type='warning' size='small'>去支付</Button>
+                return <Button onClick={handlePay} type='warning' size='small'>去支付</Button>
             case 1:
                 return <Button size='small'>已完成</Button>
             default:
                 break;
         }
     };
+
+    const handlePay = async () => {
+        const result = await http({
+            url: '/orders/pay',
+            body: {
+                id: props.id
+            }
+        });
+        if (result) {
+            Toast.success('支付成功');
+            window.location.reload();
+        }
+    }
 
     return (
         <div className='order-item'>
