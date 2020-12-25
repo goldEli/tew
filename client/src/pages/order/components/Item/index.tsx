@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "antd-mobile"
 import { IOrderInfo } from "@/type";
+import { timer } from "@/utils";
 
 type IItemProps = {
     type: number,
@@ -25,7 +26,7 @@ const Item: React.FC<IItemProps> = (props) => {
             <div className='center'>
                 <div className='title'>{props?.house?.name}</div>
                 <div className='price'>￥{props?.house?.price}</div>
-                <div className='time'>{props?.createTime}</div>
+                <div className='time'>{timer(props?.createTime)}</div>
             </div>
             <div className='pay'>
                 {renderPay()}

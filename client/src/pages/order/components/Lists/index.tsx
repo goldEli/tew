@@ -12,7 +12,7 @@ interface IListsProps {
 }
 
 const Lists: React.FC<IListsProps> = (props) => {
-    console.log(props.showLoading)
+    // console.log(props.showLoading)
     // const [showSkeletions, setShowSkeletions] = React.useState(true)
 
 
