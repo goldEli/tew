@@ -2,11 +2,11 @@
 
 const BaseController = require("./base");
 class UserController extends BaseController {
-  async getToken() {
+  async getToken({username, id}) {
     const { ctx, app } = this;
-    const { username } = ctx.params();
     const token = await app.jwt.sign(
       {
+        id,
         username,
       },
       app.config.jwt.secret
@@ -37,7 +37,10 @@ class UserController extends BaseController {
       createTime: ctx.helper.time(),
     });
     if (res) {
-      const token = await this.getToken();
+      const token = await this.getToken({
+        id: res.id,
+        username: res.username
+      });
 
       this.success({
         ...this.parseResult(ctx, res),
@@ -56,7 +59,10 @@ class UserController extends BaseController {
       this.error("This user dose not exsit");
       return;
     }
-    const token = await this.getToken();
+    const token = await this.getToken({
+      id: user.id,
+      username: user.username
+    });
     this.success({
       ...this.parseResult(ctx, user),
       token,
