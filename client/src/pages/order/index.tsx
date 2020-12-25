@@ -67,7 +67,7 @@ const Order: React.FC<IOrderProps> = (props) => {
      * 4，拼装数据，然后page
      */
     useObserverHook('#' + commonEnums.LOADING_ID, async (entries) => {
-        console.log(entries)
+        console.log(entries, 1111)
         if (entries[0].isIntersecting) {
             const result = await invokeHttp(page.current + 1) as IOrderInfo[];
             if (!isEmpty(orders) && !isEmpty(result) && result.length === page.pageSize) {
