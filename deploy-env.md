@@ -145,5 +145,7 @@ docker run --name nginx -d -p 80:80 -v /root/nginx/log:/var/log/nginx -v /root/n
 docker build -t 镜像名称:版本 Dockerfile路径
 
 
-## run server
+## server
+docker build -t egg:v1.0 ./server
+
 docker run -d -p 7001:7001 --name server id

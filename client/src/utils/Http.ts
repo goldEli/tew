@@ -40,7 +40,7 @@ export default function http<T>({
       .then(res => res.json())
       .then(res => {
         if (res.status === 1001) {
-          location.href = "/login"
+          location.href = "#/login"
           localStorage.clear()
         }
         if (res.status === 200) {

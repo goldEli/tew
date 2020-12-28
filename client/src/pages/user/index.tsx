@@ -27,7 +27,8 @@ const User: React.FC<IUserProps> = (props) => {
             url: "/user/logout"
         })
         localStorage.clear()
-        location.href = "/login?from=" + location.pathname
+        // location.href = "/login?from=" + location.pathname
+        location.href = "#/login?from=" + location.pathname
     }
 
     return (
