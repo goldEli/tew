@@ -81,3 +81,55 @@ docker pull daocloud.io/library/node:12.18
 
 docker run -itd --name node 镜像id
 ```
+
+## Nginx
+
+```shell
+docker pull daocloud.io/library/nginx:1.13.0-alpine
+
+# nginx配置文件
+/etc/nginx/nginx.conf
+
+# nginx中html目录
+/usr/share/nginx/html
+
+# 日志文件
+/var/log/nginx/access.log
+
+# 把文件有本地复制到远端
+scp -rp dist root@remoteIP:/root
+
+# 从宿主机拷文件到容器里面
+docker cp dist nginx容器id:/usr/share/nginx/html
+
+vi /etc/nginx/nginx.conf
+
+# 添加内容
+server {
+  #监听端口
+  listen 80;
+  #监听地址
+  server_name 阿里云公网IP;      
+
+  location / {
+    #根目录
+    root   /usr/share/nginx/html; 
+    #设置默认页
+    index  index.html;
+  }
+  
+  # 接口转发
+  location ~ /api/ {
+    proxy_pass http://阿里云公网IP:7001; # 7001为node服务的端口号
+  }
+
+# 正常运行nginx
+docker run -d -p 80:80 --name nginx 镜像id
+
+# 通过目录映射来运行nginx
+# 冒号":"前面的目录是宿主机目录，后面的目录是容器内目录
+docker run --name nginx -d -p 80:80 -v /root/nginx/log:/var/log/nginx -v /root/nginx/conf/nginx.conf:/etc/nginx/nginx.conf -v /root/nginx/conf.d:/etc/nginx/conf.d -v /root/nginx/html:/usr/share/nginx/html 镜像id
+}
+```
+## 生成镜像
+docker build -t 镜像名称:版本 Dockerfile路径
