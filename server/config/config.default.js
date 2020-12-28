@@ -83,6 +83,11 @@ module.exports = (appInfo) => {
     maxIntervalTime: 3*3000
   }
 
+  config.interfaceCache = {
+    expire: 10,
+    include: ['/api/user/detail']
+  }
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

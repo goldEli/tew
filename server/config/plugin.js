@@ -43,3 +43,8 @@ exports.interfaceLimit = {
   enable: true,
   package: "../lib/plugin/egg-interfaceLimit",
 };
+
+exports.interfaceCache = {
+  enable: true,
+  package: "../lib/plugin/egg-interfaceCache",
+};

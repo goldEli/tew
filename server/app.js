@@ -17,6 +17,7 @@ module.exports = app => {
     "allowHosts",
     "notFound",
     "auth",
+    "interfaceCache"
   ]
   app.config.coreMiddleware.push(...middlewares)
 }
