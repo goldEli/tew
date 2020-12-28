@@ -143,3 +143,7 @@ docker run --name nginx -d -p 80:80 -v /root/nginx/log:/var/log/nginx -v /root/n
 ```
 ## 生成镜像
 docker build -t 镜像名称:版本 Dockerfile路径
+
+
+## run server
+docker run -d -p 7001:7001 --name server id
