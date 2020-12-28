@@ -4,7 +4,7 @@ export { default as cookie } from "./cookie"
 
 export const getUrlParamsByKey = (key: string) => {
 
-  const queryString = window.location.search;
-  const urlParams = new URLSearchParams(queryString);
-  return urlParams.get(key)
+  const queryString = window.location.href;
+  const url = new URL(queryString);
+  return url.searchParams.get(key)
 } 
