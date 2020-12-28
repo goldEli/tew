@@ -38,3 +38,8 @@ exports.allowHosts = {
   enable: true,
   package: "../lib/plugin/egg-allowHosts",
 };
+
+exports.interfaceLimit = {
+  enable: true,
+  package: "../lib/plugin/egg-interfaceLimit",
+};

@@ -77,6 +77,12 @@ module.exports = (appInfo) => {
       "127.0.0.1:8000"
     ]
   }
+
+  config.interfaceLimit = {
+    maxCount: 3,
+    maxIntervalTime: 3*3000
+  }
+
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

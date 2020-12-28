@@ -13,6 +13,7 @@ module.exports = app => {
   //   }
   // }
   const middlewares = [
+    "interfaceLimit",
     "allowHosts",
     "notFound",
     "auth",

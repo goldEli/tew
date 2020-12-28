@@ -21,6 +21,7 @@ import 'egg-redis';
 import '../lib/plugin/egg-auth';
 import '../lib/plugin/egg-notFound';
 import '../lib/plugin/egg-allowHosts';
+import '../lib/plugin/egg-interfaceLimit';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -43,5 +44,6 @@ declare module 'egg' {
     auth?: EggPluginItem;
     notFound?: EggPluginItem;
     allowHosts?: EggPluginItem;
+    interfaceLimit?: EggPluginItem;
   }
 }
