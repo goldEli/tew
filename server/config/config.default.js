@@ -71,6 +71,12 @@ module.exports = (appInfo) => {
     exclude: ["/api/user/login", "/api/user/register"],
   };
 
+  config.allowHosts = {
+    hosts: [
+      "localhost:8000", 
+      "127.0.0.1:8000"
+    ]
+  }
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',
@@ -78,6 +84,7 @@ module.exports = (appInfo) => {
     dayFormat: "YYYY-MM-DD HH:mm:ss",
     redisExpire: 60*60*24
   };
+
 
   return {
     ...config,
