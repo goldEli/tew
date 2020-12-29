@@ -4,6 +4,7 @@ const BaseController = require("./base");
 class UserController extends BaseController {
   async getToken({username, id}) {
     const { ctx, app } = this;
+    console.log("token", {id, username})
     const token = await app.jwt.sign(
       {
         id,
