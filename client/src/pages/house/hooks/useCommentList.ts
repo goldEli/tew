@@ -64,7 +64,7 @@ function useCommentList(): IReturnType {
     setParams(prev => {
       return {
         ...prev,
-        current: prev.current + 1,
+        current: (prev as any).current + 1,
       }
     })
   }
