@@ -146,6 +146,11 @@ docker build -t 镜像名称:版本 Dockerfile路径
 
 
 ## server
+```shell
 docker build -t egg:v1.0 ./server
 
 docker run -d -p 7001:7001 --name server id
+```
+
+
+

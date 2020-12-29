@@ -20,4 +20,5 @@ module.exports = app => {
     "interfaceCache"
   ]
   app.config.coreMiddleware.push(...middlewares)
+  console.log("middleware: ", app.config.coreMiddleware)
 }
