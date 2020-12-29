@@ -32,7 +32,6 @@ export default function http<T>({
       method,
       body: JSON.stringify(body)
     }
-    console.log(params)
   }
 
   return new Promise((resolve, reject) => {

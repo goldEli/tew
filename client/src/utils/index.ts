@@ -6,6 +6,7 @@ export const getUrlParamsByKey = (key: string) => {
 
   const url = window.location.href;
   const value = gup(key, url)
+  console.log(url, key, value)
   return value
 }
 
