@@ -45,7 +45,7 @@ const House: React.FC<IHouseProps> = (props) => {
     const res = await http({
       url: "/orders/hasOrder",
       body: {
-        id: query.id,
+        id: Number(query.id),
       }
     }) as IOrderInfo
     setOrder(res || {})

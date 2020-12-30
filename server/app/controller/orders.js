@@ -4,7 +4,7 @@ const BaseController = require('./base');
 class OrdersController extends BaseController {
   async hasOrder() {
     const { ctx, app } = this;
-    console.log("ctx.userId", ctx.userId)
+    console.log("ctx.userId", ctx.userId, ctx.params('id'))
     const result = await ctx.service.orders.hasOrder({
       userId: ctx.userId,
       houseId: ctx.params('id')
